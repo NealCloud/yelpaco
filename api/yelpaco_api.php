@@ -181,7 +181,7 @@ if($_SERVER["REQUEST_METHOD"] == 'POST') {
 }
 else{
     $errorOut['error'] = 'no post data detected';
-    $errorOut['data'] = $_POST;
+    $errorOut['data'] = $_GET;
     print_r(json_encode($errorOut));
 }
 

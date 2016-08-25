@@ -1,19 +1,19 @@
 # Yelpaco!
 
-- [Live Demo](http://nealcloud.com/hots-tracker/)
+- [Live Demo](http://nealcloud.com/yelpaco/)
 
 ### Features
-  - get them tacos from yelperino
+  - get local tacos from yelperino
 
 ### Api
- - select a hero
+ - get taco places
  url: nealcloud.com/yelperino/api/taco.php
  method: post
- data: {location: 'sf'}
+ data: {zip: 'sf', lat: -122.121251551, lon: 33.1551351}
  dataType: json
 
 ### Lessons Learned
- - using api for mobile app and following all their rules
+ - using api for a mobile app and following all their rules
 
 ### Version
 .1

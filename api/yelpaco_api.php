@@ -1,5 +1,7 @@
 <?php
-
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST');
+header("Access-Control-Allow-Headers: X-Requested-With");
 // Enter the path that the oauth library is in relation to the php file
 require_once('../lib/OAuth.php');
 require_once('apicred.php');

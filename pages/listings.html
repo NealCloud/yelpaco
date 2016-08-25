@@ -3,20 +3,19 @@
     Finding Tacos
 </div>
 <ul class="demo-list-three mdl-list" ng-repeat="key in lc.tacoList.tacostands">
-    <li class="mdl-list__item mdl-list__item--three-line" ng-click="lc.getDirections(key.location.coordinates.latitude,
-    key.location.coordinates.longitude,
-    lc.tacoList.user.location.coordinates.latitude,
-    lc.tacoList.user.location.coordinates.longitude)">
+    <li class="mdl-list__item mdl-list__item--three-line" ng-click="lc.getDirections(key.location.coordinate.latitude,
+    key.location.coordinate.longitude,
+    lc.user.lat,
+    lc.user.lon)">
     <span class="mdl-list__item-primary-content">
-      <i class="material-icons mdl-list__item-avatar">person</i>
+      <img src="{{key.image_url}}" class="material-icons mdl-list__item-avatar">
       <span>{{key.name}}</span>
       <span class="mdl-list__item-text-body">
-        Bryan Cranston played the role of Walter in Breaking Bad. He is also known
-        for playing Hal in Malcom in the Middle.
+        {{key.snippet_text}}
       </span>
     </span>
     <span class="mdl-list__item-secondary-content">
-        <img ng-src="{{key.rating}}" alt="">
+        <img ng-src="{{key.rating_img_url}}" alt="">
     </span>
     </li>
 </ul>

@@ -123,6 +123,7 @@ function get_business($business_id) {
 function query_api($term, $location, $coords) {
     //create output array
     $output = ['success' => false];
+    $output['postData'] = $_POST;
     //ajax api request
     $response = isset($coords) ? json_decode(search($term, $location, $coords)): json_decode(search($term, $location, null)) ;
     //get the length business returned
@@ -151,18 +152,9 @@ function query_api($term, $location, $coords) {
     print_r(json_encode($output));
 }
 
-/**
- * User input is handled here
- */
-$longopts  = array(
-    "term::",
-    "location::",
-);
 
-$options = getopt("longbeach", $longopts);
-
-$term = $options['term'] ?: '';
-$location = $options['location'] ?: '';
+$term = '';
+$location = '';
 
 $lat = '34.9178543';
 $lon = '-117.1133961';
@@ -180,7 +172,7 @@ if($_SERVER["REQUEST_METHOD"] == 'POST') {
     if(isset($_POST['zip'])) {
         $GLOBALS['zip'] = $_POST['zip'];
     }
-    if(isset($GLOBALS['lat'])){
+    if(isset($_POST['lat'])){
         $ll = $lat . ',' . $lon;
     }
     query_api($term,$zip, $ll);

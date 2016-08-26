@@ -70,7 +70,7 @@ angular.module('tacoFinder')
                 dirUrl += lat1  + "," + lon1 + "/" + lat2 + "," + lon2;
             }
             else{
-                dirUrl += lat1  + "," + lon1 + "/";
+                dirUrl += lat1  + "," + lon1;
             }
             window.open(dirUrl);
         };

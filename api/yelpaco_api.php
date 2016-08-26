@@ -54,6 +54,7 @@ function request($host, $path) {
     $signed_url = $oauthrequest->to_url();
 
     // Send Yelp API Call
+
     try {
         $ch = curl_init($signed_url);
         if (FALSE === $ch)
@@ -77,6 +78,7 @@ function request($host, $path) {
             $e->getCode(), $e->getMessage()),
             E_USER_ERROR);
     }
+
     return $data;
 }
 
@@ -133,31 +135,19 @@ function query_api($term, $location, $coords) {
     if($output['bizcount'] > 0){
         $output['success'] = true;
     }
+
     $output['userinfo']['coords'] = $coords;
     $output['userinfo']['loc'] = $location;
-   // print_r($response->businesses[2]);
-    $business_id = $response->businesses[0]->id; //get a business id from array
-    //print_r(json_encode($response));
-   // print sprintf(
-//        "%d businesses found, querying business info for the top result \"%s\"\n\n",
-//        count($response->businesses),
-//        $business_id
-//    );
 
-    //
+    $business_id = $response->businesses[0]->id; //get a business id from array
+
     for($i = 0; $i < $output['bizcount']; $i++){
             $output['tacostands'][$i] = json_decode(get_business($response->businesses[$i]->id));
         }
-    //$response = get_business($business_id);
-    //$output['options'] = $GLOBALS['options'];
-    //print sprintf("Result for business \"%s\" found:\n", $business_id);
-    print_r(json_encode($output));
+    return $output;
 }
 
-
-$term = '';
-$location = '';
-
+$term = 'taco';
 $lat = '34.9178543';
 $lon = '-117.1133961';
 $zip = 'long beach';
@@ -177,11 +167,14 @@ if($_SERVER["REQUEST_METHOD"] == 'POST') {
     if(isset($_POST['lat'])){
         $ll = $lat . ',' . $lon;
     }
-    query_api($term,$zip, $ll);
+
+    $outputfile = query_api($term,$zip, $ll);
+    print_r(json_encode($outputfile));
 }
+
 else{
     $errorOut['error'] = 'no post data detected';
-    $errorOut['data'] = $_GET;
+    $errorOut['dataParams'] = $_GET;
     print_r(json_encode($errorOut));
 }
 

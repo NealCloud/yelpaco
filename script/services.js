@@ -65,7 +65,7 @@ angular.module('tacoFinder')
         };
 
         this.tacoDirection = function(lat1, lon1, lat2, lon2){
-            var dirUrl = "https://www.google.com/maps/dir/";
+            var dirUrl = "https://maps.google.com/maps/dir/";
             if(lat2 && lon2){
                 dirUrl += lat1  + "," + lon1 + "/" + lat2 + "," + lon2;
             }

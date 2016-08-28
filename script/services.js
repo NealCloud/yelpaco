@@ -53,7 +53,7 @@ angular.module('tacoFinder')
             .then(
                 function (response) {
                     console.log('Success', response);
-                    tacoScope.tacoHolder = response.data;
+                    tacoFastFoodFilter(response.data.tacostands);
                     tacoScope.tacoLoad = false;
                     tacoScope.goToListing('listings');
                 },
@@ -61,7 +61,19 @@ angular.module('tacoFinder')
                     console.log('Failure', error);
                 }
             );
+        };
 
+        function tacoFastFoodFilter(foodData){
+            tacoScope.tacoHolder = foodData.map(function(biz){
+                var foodFilter = biz.name.toLowerCase();
+                if(foodFilter == "taco bell" || foodFilter == 'del taco' || foodFilter == 'chronic tacos'){
+                    biz.fastfood = true;
+                }
+                else{
+                    biz.fastfood = false;
+                }
+                return  biz;
+            });
         };
 
         this.tacoDirection = function(lat1, lon1, lat2, lon2){

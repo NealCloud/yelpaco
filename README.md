@@ -9,7 +9,7 @@
  - get taco places
  url: nealcloud.com/yelperino/api/taco.php
  method: post
- data: {zip: 'sf', lat: -122.121251551, lon: 33.1551351}
+ data: {zip: 'zipcode or city'}
  dataType: json
 
 ### Lessons Learned

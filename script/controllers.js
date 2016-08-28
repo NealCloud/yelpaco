@@ -22,12 +22,33 @@ angular.module('tacoFinder')
             }
         };
         function init(){
-            headScope.getUserLoc();
+            //headScope.getUserLoc();
         }
         init();
     })
     .controller("listingCtrl", function ($scope, tacoServe) {
+        var listScope = this;
         this.tacoList = tacoServe.tacoHolder;
+        this.filterList = tacoServe.tacoHolder;
         this.getDirections = tacoServe.tacoDirection;
         this.user = tacoServe.userLocation;
+        $scope.fastFood = true;
+
+        $scope.$watch('fastFood', function(){
+            console.log(listScope.filterList);
+            if($scope.fastFood){
+                listScope.filterList =  listScope.tacoList.filter(function(biz){
+                    return !biz.fastfood ;
+                })
+            }
+            else{
+                listScope.filterList =  listScope.tacoList;
+            }
+
+        });
+
+        function init(){
+
+        }
+        init();
     });

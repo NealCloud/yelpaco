@@ -16,7 +16,7 @@ require_once('apicred.php');
 $API_HOST = 'api.yelp.com';
 $DEFAULT_TERM = 'taco';
 $DEFAULT_LOCATION = 'Costa Mesa, CA';
-$SEARCH_LIMIT = 3;
+$SEARCH_LIMIT = 5;
 $SEARCH_PATH = '/v2/search/';
 $BUSINESS_PATH = '/v2/business/';
 $SORT_BY = "1"; //sort by distance

@@ -2,7 +2,11 @@
 <div>
     Finding Tacos
 </div>
-<ul class="demo-list-three mdl-list" ng-repeat="key in lc.tacoList.tacostands">
+<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="fastfood">
+    <input type="checkbox" id="fastfood" class="mdl-checkbox__input" ng-model="fastFood" checked>
+    <span class="mdl-checkbox__label">Fast Food</span>
+</label>
+<ul class="demo-list-three mdl-list" ng-repeat="key in lc.filterList">
     <li class="mdl-list__item mdl-list__item--three-line" ng-click="lc.getDirections(key.location.coordinate.latitude,
     key.location.coordinate.longitude,
     lc.user.lat,

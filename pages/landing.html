@@ -1,7 +1,12 @@
+
 <h1>{{hc.tacoTitle}}</h1>
 
-<button ng-hide="hc.tacoLoading" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="toacizer" ng-click="hc.tacoFinder()">GET TACo</button><br>
+<button ng-hide="hc.tacoLoading"
+        class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+        id="toacizer" ng-click="hc.tacoFinder()">GET TACo</button><br>
 <!-- MDL Spinner Component -->
+<!--<div smooth-button class="container" ng-mouseenter="play()" ng-mouseleave="reverse()"></div>-->
+
 <div class="mdl-spinner mdl-js-spinner is-active"></div><br>
 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
     <input class="mdl-textfield__input" type="text" id="zip" ng-model="hc.zip">

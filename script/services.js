@@ -66,15 +66,18 @@ angular.module('tacoFinder')
         function tacoFastFoodFilter(foodData){
             tacoScope.tacoHolder = foodData.map(function(biz){
                 var foodFilter = biz.name.toLowerCase();
-                if(foodFilter == "taco bell" || foodFilter == 'del taco' || foodFilter == 'chronic tacos'){
+
+                if(foodFilter == "taco bell" || foodFilter == 'del taco'){
                     biz.fastfood = true;
                 }
                 else{
                     biz.fastfood = false;
                 }
-                return  biz;
+                return biz;
+            }).filter(function(biz){
+                return !biz.is_closed;
             });
-        };
+        }
 
         this.tacoDirection = function(lat1, lon1, lat2, lon2){
             var dirUrl = "https://maps.google.com?saddr=Current+Location&daddr=";

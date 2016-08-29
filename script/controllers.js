@@ -21,9 +21,14 @@ angular.module('tacoFinder')
                 console.log('no zip given');
             }
         };
+
+
         function init(){
-            //headScope.getUserLoc();
+            //var tl = new TimelineLite();
+            //tl.add(TimelineLite.to($(".pink"), 0.4, {scaleX:1.8, scaleY:1.8, ease: Power2.easeOut}));
+
         }
+
         init();
     })
     .controller("listingCtrl", function ($scope, tacoServe) {
@@ -51,4 +56,29 @@ angular.module('tacoFinder')
 
         }
         init();
-    });
+    })
+
+.directive('smoothButton', function(){
+    var linker = function (scope, element, attrs) {
+        var tl = new TimelineLite();
+        tl.add(TweenLite.to(element.find('.red'), 0.4, {scaleX:1.8, scaleY:1.8, ease: Power2.easeOut}));
+        tl.add(TweenLite.to(element.find('.orange'), 0.4, {scaleX:1.6, scaleY:1.6, ease: Power2.easeOut}), '-=0.2');
+        tl.add(TweenLite.to(element.find('.yellow'), 0.4, {scaleX:1.4, scaleY:1.4, ease: Power2.easeOut}), '-=0.2');
+        tl.stop();
+
+        scope.play = function() {
+            console.log('plaing');
+            tl.play();
+        };
+
+        scope.reverse = function() {
+            tl.reverse();
+        };
+    };
+
+    return {
+        scope: false,
+        link: linker,
+        templateUrl: 'pages/gsap.html'
+    }
+});

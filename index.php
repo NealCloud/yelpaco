@@ -48,7 +48,6 @@
 <body ng-app="tacoFinder">
     <div ui-view id="container"></div>
 
-
     <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
 <!--    <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.13.1/TweenMax.min.js"></script>-->
@@ -60,8 +59,8 @@
     <script src="script/controllers.js"></script>
     <script src="script/tacotester.js"></script>
     <script defer src="https://code.getmdl.io/1.2.0/material.min.js"></script>
-    <script type="text/ng-template" id="smooth-button.tmpl.html">
 
+    <script type="text/ng-template" id="smooth-button.tmpl.html">
         <div class="circle red"></div>
         <div class="circle orange"></div>
         <div class="circle yellow"></div>

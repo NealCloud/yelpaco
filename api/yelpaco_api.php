@@ -19,8 +19,9 @@ $DEFAULT_LOCATION = 'Costa Mesa, CA';
 $SEARCH_LIMIT = 5;
 $SEARCH_PATH = '/v2/search/';
 $BUSINESS_PATH = '/v2/business/';
-$SORT_BY = "1"; //sort by distance
-
+$SORT_BY = "2"; //sort by rating
+$RADIUS = "16000"; //meters = 10 miles*
+$OFFSET = 0;
 /**
  * Makes a request to the Yelp API and returns the response
  *
@@ -89,7 +90,7 @@ function request($host, $path) {
  * @param    $location    The search location passed to the API
  * @return   The JSON response from the request
  */
-function search($term, $location, $lonlat) {
+function search($term, $location,$offset, $lonlat) {
 
     $url_params = array();
 
@@ -100,6 +101,9 @@ function search($term, $location, $lonlat) {
     $url_params['location'] = $location?: $GLOBALS['DEFAULT_LOCATION'];
     $url_params['limit'] = $GLOBALS['SEARCH_LIMIT'];
     $url_params['sort'] = $GLOBALS['SORT_BY'];
+    $url_params['radius_filter'] = $GLOBALS['RADIUS'];
+    $url_params['offset'] = $offset;
+
     $search_path = $GLOBALS['SEARCH_PATH'] . "?" . http_build_query($url_params);
 
     return request($GLOBALS['API_HOST'], $search_path);
@@ -124,12 +128,12 @@ function get_business($business_id) {
  * @param    $term        The search term to query
  * @param    $location    The location of the business to query
  */
-function query_api($term, $location, $coords) {
+function query_api($term, $location, $offset, $coords) {
     //create output array
     $output = ['success' => false];
     $output['postData'] = $_POST;
     //ajax api request
-    $response = isset($coords) ? json_decode(search($term, $location, $coords)): json_decode(search($term, $location, null)) ;
+    $response = isset($coords) ? json_decode(search($term, $location,$offset, $coords)): json_decode(search($term, $location,$offset, null)) ;
     //get the length business returned
     $output['bizcount'] = count($response->businesses);
     if($output['bizcount'] > 0){
@@ -167,8 +171,11 @@ if($_SERVER["REQUEST_METHOD"] == 'POST') {
     if(isset($_POST['lat'])){
         $ll = $lat . ',' . $lon;
     }
+    if(isset($_POST['offset'])){
+        $offset = $_POST['offset'];
+    }
 
-    $outputfile = query_api($term,$zip, $ll);
+    $outputfile = query_api($term,$zip,$offset, $ll);
     print_r(json_encode($outputfile));
 }
 

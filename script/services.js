@@ -32,6 +32,7 @@ angular.module('tacoFinder')
                      tacoScope.getTacos(tacoScope.userLocation, true);
                 }
                 else{
+                    console.log('sending', tacoScope.userLocation);
                      tacoScope.getTacos(tacoScope.userLocation, false);
                 }
             }
@@ -41,7 +42,8 @@ angular.module('tacoFinder')
         };
 
         this.getTacos = function(userdata, coordsBool){
-            var locationObj = coordsBool ? userdata : { zip: userdata.zip };
+
+            var locationObj = coordsBool ? userdata : { zip: userdata.zip, offset: 9 };
             tacoScope.tacoLoad = true;
             $http({
                 url:'api/yelpaco_api.php',
@@ -87,5 +89,49 @@ angular.module('tacoFinder')
 
         this.goToListing = function(id){
             $location.path(id);
+        }
+        var fakeip = {
+            "homeMobileCountryCode": 310,
+            "homeMobileNetworkCode": 260,
+            "radioType": "gsm",
+            "carrier": "T-Mobile",
+            "cellTowers": [
+                {
+                    "cellId": 39627456,
+                    "locationAreaCode": 40495,
+                    "mobileCountryCode": 310,
+                    "mobileNetworkCode": 260,
+                    "age": 0,
+                    "signalStrength": -95
+                }
+            ],
+            "wifiAccessPoints": [
+                {
+                    "macAddress": "01:23:45:67:89:AB",
+                    "signalStrength": 8,
+                    "age": 0,
+                    "signalToNoiseRatio": -65,
+                    "channel": 8
+                },
+                {
+                    "macAddress": "01:23:45:67:89:AC",
+                    "signalStrength": 4,
+                    "age": 0
+                }
+            ]
+        };
+        this.geolocator = function(){
+            $.ajax({
+                url: 'https://www.googleapis.com/geolocation/v1/geolocate',
+                data: {key:"AIzaSyC6o5e3BDFg9nAKsapCRvt69C6aRaT-htg"},
+                method: 'post',
+
+                success: function(re){
+                    console.log(re);
+                },
+                error: function(er){
+                    console.log(er);
+                }
+            })
         }
     });

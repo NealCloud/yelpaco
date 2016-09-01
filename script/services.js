@@ -134,4 +134,53 @@ angular.module('tacoFinder')
                 }
             })
         }
+
+        this.fourSquarer = function(){
+            var url = 'https://api.foursquare.com/v2/venues/explore?';
+            var data = {
+                openNow: 1,
+                sortByDistance: 1,
+                ll: "33.665242,-117.7490656",
+                query: 'tacos',
+                oauth_token : "YNLF5FJXRMC2G43X1PPW1PMG13AEWKNAP01BHCR0OMVIION3",
+                v: 20160831
+            };
+            $.ajax({
+                url: url,
+                data: $.param(data),
+                method: 'get',
+                dataType: 'json',
+                success: function(res){
+                    console.log(res.response.groups[0].items)
+                },
+                error: function(er){
+                    console.log(er);
+                }
+            })
+
+        };
+
+        this.googlePlace = function(){
+            var url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?';
+            data = {
+                location:"33.665242,-117.7490656",
+                key:"AIzaSyBbT5jDNA6Gpmiv8Of8k6S-GaFBCQRco",
+                query: "9494724468"
+            };
+            $.ajax({
+                url: url,
+                data: $.param(data),
+                method: 'get',
+                dataType: 'json',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                success: function(res){
+                    console.log(res);
+                },
+                error: function(er){
+                    console.log(er);
+                }
+            })
+
+        };
+       // https://api.foursquare.com/v2/venues/explore?openNow=1&sortByDistance=1&ll=33.665242,-117.7490656&query=tacos&oauth_token=YNLF5FJXRMC2G43X1PPW1PMG13AEWKNAP01BHCR0OMVIION3&v=20160831
     });

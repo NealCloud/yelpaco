@@ -9,7 +9,7 @@ angular.module('tacoFinder')
         this.getUserLoc = tacoServe.userFinder;
         this.zip = null;
         this.tacoLoading = false;
-        this.locator = tacoServe.geolocator;
+        this.locator = tacoServe.googlePlace;
 
         this.tacoFinder = function(){
             if(tacoServe.userLocation.zip || headScope.zip){

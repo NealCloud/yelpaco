@@ -162,7 +162,7 @@ angular.module('tacoFinder')
 
         this.googlePlace = function(){
             //https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=500&type=restaurant&name=cruise&key=YOUR_API_KEY
-            var location = {location: 'hey'};
+            var location = {id: 'lolo'};
             $http({
                 url:'api/place_id_api.php',
                 method: 'post',

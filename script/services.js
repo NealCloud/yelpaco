@@ -164,23 +164,30 @@ angular.module('tacoFinder')
             var url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?';
             data = {
                 location:"33.665242,-117.7490656",
-                key:"AIzaSyBbT5jDNA6Gpmiv8Of8k6S-GaFBCQRco",
+                key:"AIzaSyC6o5e3BDFg9nAKsapCRvt69C6aRaT-htg",
                 query: "9494724468"
             };
             $.ajax({
                 url: url,
                 data: $.param(data),
-                method: 'get',
-                dataType: 'json',
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                success: function(res){
-                    console.log(res);
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Negotiate");
                 },
-                error: function(er){
-                    console.log(er);
+                method: 'get',
+                //headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                cache: false,
+                success: function(data){
+                    console.log(data);
                 }
             })
-
+                //.then(
+                //    function (response) {
+                //        console.log('Success', response);
+                //    },
+                //    function (error) {
+                //        console.log('Failure', error);
+                //    }
+                //);
         };
        // https://api.foursquare.com/v2/venues/explore?openNow=1&sortByDistance=1&ll=33.665242,-117.7490656&query=tacos&oauth_token=YNLF5FJXRMC2G43X1PPW1PMG13AEWKNAP01BHCR0OMVIION3&v=20160831
     });

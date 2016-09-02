@@ -1,4 +1,5 @@
 <?php
+header('Access-Control-Allow-Origin: *');
 
 $SEARCH_PATH = 'place/details/json';
 $DEFAULT_ID = "ChIJHU1kl5s2w4ARwGSmC0EH61Y";

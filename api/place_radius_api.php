@@ -1,11 +1,13 @@
 <?php
 
 $DEFAULT_COORD = "33.665242,-117.7490656";
-$DEFAULT_QUERY = "9494724468";
-$SEARCH_PATH = 'place/textsearch/json';
+$DEFAULT_RADIUS = "10000";
+$SEARCH_PATH = 'place/nearbysearch/json';
+$DEFAULT_TYPE = 'restaurant';
+$DEFAULT_KEYWORD = 'taco';
 
 $ll = false;
-$phone = false;
+$radius = false;
 $missing = [];
 if(isset($_POST['lat'])) {
     $lat = $_POST['lat'];
@@ -22,22 +24,25 @@ else{
 if(isset($_POST['lat'])){
     $ll = $lat . ',' . $lon;
 }
-if(isset($_POST['phone'])){
-    $phone = $_POST['phone'];
+if(isset($_POST['radius'])){
+    $radius = $_POST['radius'];
 }
 else{
-    array_push($missing, 'no phone property given');
+    array_push($missing, 'no radius property given');
 }
 
-$output['searchPath'] = urlBuild($ll, $phone);
+$output['searchPath'] = urlBuild($ll, $radius, false, false);
 $output['missing'] = $missing;
 
-function urlBuild($loc, $phone){
+function urlBuild($loc, $rad, $type, $keyword){
     $url_params = array();
 
     $url_params['key'] = $GLOBALS['GOOGLEAPIKEY'];
-    $url_params['query'] = $phone ? $phone : $GLOBALS['DEFAULT_QUERY'];
+
+    $url_params['type'] = $type ? $type : $GLOBALS['DEFAULT_TYPE'];
     $url_params['location'] = $loc ? $loc : $GLOBALS['DEFAULT_COORD'];
+    $url_params['radius'] = $rad ? $rad : $GLOBALS['DEFAULT_RADIUS'];
+    $url_params['keyword'] = $keyword ? $keyword : $GLOBALS['DEFAULT_KEYWORD'];
 
     $search_path = $GLOBALS['API_HOST'] . $GLOBALS['SEARCH_PATH'] . "?" . http_build_query($url_params);
 

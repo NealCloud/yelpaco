@@ -9,6 +9,7 @@ $DEFAULT_KEYWORD = 'taco';
 $ll = false;
 $radius = false;
 $missing = [];
+$api = false;
 if(isset($_POST['lat'])) {
     $lat = $_POST['lat'];
 }
@@ -30,14 +31,20 @@ if(isset($_POST['radius'])){
 else{
     array_push($missing, 'no radius property given');
 }
+if(isset($_POST['apiKey'])){
+    $api = $_POST['apiKey'];
+}
+else{
+    array_push($missing, 'no api given');
+}
 
-$output['searchPath'] = urlBuild($ll, $radius, false, false);
+$output['searchPath'] = urlBuild($ll, $radius, false, false, $api);
 $output['missing'] = $missing;
 
-function urlBuild($loc, $rad, $type, $keyword){
+function urlBuild($loc, $rad, $type, $keyword, $api){
     $url_params = array();
 
-    $url_params['key'] = $GLOBALS['GOOGLEAPIKEY'];
+    $url_params['key'] = $api ? $api : $GLOBALS['GOOGLEAPIKEY'];
 
     $url_params['type'] = $type ? $type : $GLOBALS['DEFAULT_TYPE'];
     $url_params['location'] = $loc ? $loc : $GLOBALS['DEFAULT_COORD'];

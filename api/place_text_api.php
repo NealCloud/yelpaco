@@ -8,20 +8,17 @@ $ll = false;
 $phone = false;
 $missing = [];
 $api = false;
-if(isset($_POST['lat'])) {
+
+if(isset($_POST['lat']) && isset($_POST['lon'])){
     $lat = $_POST['lat'];
-}
-else{
-    array_push($missing, 'no lat property given');
-}
-if(isset($_POST['lon'])) {
     $lon = $_POST['lon'];
+    $ll = $lat . ',' . $lon;
+}
+elseif(isset($_POST['latlon'])){
+    $ll = $_POST['latlon'];
 }
 else{
-    array_push($missing, 'no lon property given');
-}
-if(isset($_POST['lat'])){
-    $ll = $lat . ',' . $lon;
+    array_push($missing, 'no lat or lon property given');
 }
 if(isset($_POST['phone'])){
     $phone = $_POST['phone'];

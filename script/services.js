@@ -164,7 +164,9 @@ angular.module('tacoFinder')
             //https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=500&type=restaurant&name=cruise&key=YOUR_API_KEY
            // var location = {mode: 'placeIdSearch', apiKey: 'AIzaSyCcuZ353Am9ODHsVt3CF-4KcuPY8n5t6pc', id: "ChIJu0DrMGbo3IARrBpImXrwh2E"};
             //var location = {mode: 'phoneSearch', apiKey: 'AIzaSyCcuZ353Am9ODHsVt3CF-4KcuPY8n5t6pc', phone:9495869200, lat:33.6307185, lon:-117.7177254};
-            var location = {mode: 'radiusSearch', apiKey: 'AIzaSyCcuZ353Am9ODHsVt3CF-4KcuPY8n5t6pc', radius: 5000, latlon:'33.6518085,-117.6456971'};
+            //var location = {mode: 'radiusSearch', apiKey: 'AIzaSyCcuZ353Am9ODHsVt3CF-4KcuPY8n5t6pc', radius: 5000, latlon:'33.6518085,-117.6456971'};
+            var location = {mode: "idQuery", phone: "234643634"};
+            //var location = {mode: "addPlace", phone: "1238472637", latlon:"jibberish", id:"fakeidkey", name:'chimpacos pizza'};
             $http({
                 url:'api/place_api.php',
                 method: 'post',

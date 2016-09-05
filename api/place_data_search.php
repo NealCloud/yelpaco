@@ -24,6 +24,9 @@ if(isset($_POST['id']) || isset($_POST['phone']) || isset($_POST['latlon'])){
                 $output['placeQuery'] = $row;
             }
         }
+        else{
+            $output['error'] = 'no match found';
+        }
     }
 }
 else{ //error out if no post request

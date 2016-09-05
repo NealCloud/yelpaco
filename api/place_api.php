@@ -25,6 +25,9 @@ if($_SERVER["REQUEST_METHOD"] == 'POST') {
             case 'idQuery':
                 require_once('place_data_search.php');
                 break;
+            case 'addPlace':
+                require_once('addPlace.php');
+                break;
             default :
                 $output['error'] = 'wrong mode entered';
                 $output['mode'] = $_POST['mode'];

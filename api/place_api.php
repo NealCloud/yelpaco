@@ -22,8 +22,12 @@ if($_SERVER["REQUEST_METHOD"] == 'POST') {
             case 'radiusSearch':
                 require_once('place_radius_api.php');
                 break;
+            case 'idQuery':
+                require_once('place_data_search.php');
+                break;
             default :
                 $output['error'] = 'wrong mode entered';
+                $output['mode'] = $_POST['mode'];
                 print_r(json_encode($output));
                 exit();
         }
@@ -31,6 +35,9 @@ if($_SERVER["REQUEST_METHOD"] == 'POST') {
             $output['success'] = true;
             $output['query'] = query_api($output['searchPath']);
         }
+//        elseif(isset($output['dataQuery'])){
+//            $output['success'] = true;
+//        }
     }
     print_r(json_encode($output));
 }
